@@ -56,3 +56,43 @@ for seq in dna_sequences:
     gc_count = seq.count('G') + seq.count('C')
     gc_content = (gc_count / len(seq)) * 100
     print(f"{seq}: {gc_content:.1f}% GC content")
+
+# --- Lesson 4: Functions ---
+def calculate_gc_content(sequence):
+    sequence = sequence.upper()
+    g = sequence.count('G')
+    c = sequence.count('C')
+    gc = ((g+c) / len(sequence)) * 100
+    return gc       
+
+    #Test the function
+test_sequence = "ATCGATCGTAGCTAGC"
+gc_content = calculate_gc_content(test_sequence)
+print(f"\nGC content of {test_sequence}: {gc_content:.1f}%")
+
+# Use the function on ALL your sequences at once
+print("\n--- GC Content for All Samples ---")
+for i, sequence in enumerate(dna_sequences):
+    gc = calculate_gc_content(sequence)
+    print(f"Sample {i+1}: {sequence} | GC: {gc:.1f}%")
+
+    # Function 2: Get complement strand
+def get_complement(sequence):
+    sequence = sequence.upper()
+    complement = ""
+    for base in sequence:
+        if base == "A":
+            complement += "T"
+        elif base == "T":
+            complement += "A"
+        elif base == "G":
+            complement += "C"
+        elif base == "C":
+            complement += "G"
+    return complement
+
+# Test it
+dna = "ATCGATCG"
+comp = get_complement(dna)
+print(f"\nOriginal:   {dna}")
+print(f"Complement: {comp}")
