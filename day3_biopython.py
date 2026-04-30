@@ -51,3 +51,27 @@ print(f"\n--- Real BRCA1 Analysis ---")
 print(f"Length:     {len(sequence)} bp")
 print(f"A: {a} | T: {t} | G: {g} | C: {c}")
 print(f"GC Content: {gc:.2f}%")
+
+# ---- Lesson 4: Writing FASTA Files ----
+print("\n--- Creating My Own FASTA File ---")
+
+# Write FASTA manually - no special library needed
+sequences = [
+    ("BRCA1_custom", "My custom BRCA1 fragment", "ATGGATTTATCTGCTCTTCGCGTTGAAGAAG"),
+    ("TP53_custom", "My custom TP53 fragment", "ATGGAGGAGCCGCAGTCAGATCCTAGCGTTG"),
+    ("GFP_custom", "My custom GFP fragment", "ATGGTGAGCAAGGGCGAGGAGCTGTTCACCG")
+]
+
+with open("c:/Bioinformatics/my_sequences.fasta", "w") as f:
+    for seq_id, description, sequence in sequences:
+        f.write(f">{seq_id} {description}\n")
+        f.write(f"{sequence}\n\n")
+
+print("Written 3 sequences to my_sequences.fasta ✅")
+
+# Read it back to verify
+print("\n--- Verifying ---")
+for record in SeqIO.parse("c:/Bioinformatics/my_sequences.fasta", "fasta"):
+    print(f"{record.id}: {len(record.seq)} bp")
+
+print("\n✅ Day 3 Complete!")
